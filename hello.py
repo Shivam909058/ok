@@ -15,8 +15,10 @@ import certifi
 
 load_dotenv()
 
-# Load OpenAI API key from environment or a direct variable
-openai_api_key = os.getenv("OPENAI_API_KEY")
+# Load OpenAI API key from environment
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY environment variable is not set")
 
 # MongoDB connection details
 mongo_uri = os.getenv("mongo_uri")
@@ -99,7 +101,7 @@ if uploaded_file is not None:
         st.warning("Unable to connect to MongoDB. Please check your connection string and credentials.")
 
 # Initialize OpenAI LLM
-llm = ChatOpenAI(api_key=openai_api_key, model_name="gpt-3.5-turbo")
+llm = ChatOpenAI(api_key=OPENAI_API_KEY, model_name="gpt-3.5-turbo")
 
 # Define prompt template for question-answering
 prompt = ChatPromptTemplate.from_template(
@@ -116,7 +118,7 @@ prompt = ChatPromptTemplate.from_template(
 def vector_embedding():
     """Create embeddings from documents in MongoDB."""
     if "vectors" not in st.session_state:
-        st.session_state.embeddings = OpenAIEmbeddings(api_key=openai_api_key)
+        st.session_state.embeddings = OpenAIEmbeddings(api_key=OPENAI_API_KEY)
         
         try:
             loader = MongodbLoader(
