@@ -1,0 +1,10 @@
+streamlit
+langchain-openai
+langchain
+langchain-community
+python-dotenv
+pymongo
+certifi
+faiss-cpu
+motor
+
