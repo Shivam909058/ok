@@ -16,7 +16,7 @@ import certifi
 load_dotenv()
 
 # Load OpenAI API key from environment or a direct variable
-openai_api_key = os.getenv("openai_api_key")
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 # MongoDB connection details
 mongo_uri = os.getenv("mongo_uri")
